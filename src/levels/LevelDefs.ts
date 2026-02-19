@@ -1,6 +1,21 @@
 import type { TerrainType } from '../grid/TileTypes';
 import { getMap1, getMap2, getMap3, getMap4, getMap5 } from './MapData';
+import { getMap6 } from './level6-data';
+import { getMap7 } from './level7-data';
+import { getMap8 } from './level8-data';
+import { getMap9 } from './level9-data';
+import { getMap10 } from './level10-data';
 import type { UnitClass } from '../units/UnitClasses';
+import { LEVEL_6_DEF } from './level6-data';
+import { LEVEL_7_DEF } from './level7-data';
+import { LEVEL_8_DEF } from './level8-data';
+import { LEVEL_9_DEF } from './level9-data';
+import { LEVEL_10_DEF } from './level10-data';
+import { LEVEL_11_DEF } from './level11-data';
+import { LEVEL_12_DEF } from './level12-data';
+import { LEVEL_13_DEF } from './level13-data';
+import { LEVEL_14_DEF } from './level14-data';
+import { LEVEL_15_DEF } from './level15-data';
 
 export interface LevelUnitDef {
   name: string;
@@ -152,5 +167,15 @@ export const LEVELS: LevelDef[] = [
     objectiveType: 'defeat_boss',
     objectiveTarget: 'Ember King',
     starCriteria: { turns: 16, unitsLost: 0 }
-  }
+  },
+  LEVEL_6_DEF as LevelDef,
+  LEVEL_7_DEF as LevelDef,
+  LEVEL_8_DEF as LevelDef,
+  LEVEL_9_DEF as LevelDef,
+  LEVEL_10_DEF as LevelDef,
+  LEVEL_11_DEF as LevelDef,
+  LEVEL_12_DEF as LevelDef,
+  LEVEL_13_DEF as LevelDef,
+  LEVEL_14_DEF as LevelDef,
+  LEVEL_15_DEF as LevelDef
 ];

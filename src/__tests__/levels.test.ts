@@ -4,11 +4,11 @@ import { initLevel } from '../levels/LevelManager';
 import { calculateStars } from '../levels/LevelProgression';
 
 describe('Level data', () => {
-  test('All 5 levels have valid definitions', () => {
-    expect(LEVELS).toHaveLength(5);
+  test('All 15 levels have valid definitions', () => {
+    expect(LEVELS).toHaveLength(15);
 
     const ids = new Set(LEVELS.map((level) => level.id));
-    expect(ids.size).toBe(5);
+    expect(ids.size).toBe(15);
 
     for (const level of LEVELS) {
       expect(level.name.length).toBeGreaterThan(0);
@@ -72,6 +72,9 @@ describe('Level data', () => {
   });
 
   test('initLevel creates correct unit count', () => {
+    // Levels with extra reinforcement waves beyond the single reinforcements field
+    const extraWaveCounts: Record<number, number> = { 8: 1, 10: 1, 13: 1, 15: 1 };
+
     for (const level of LEVELS) {
       const expectedCount = level.playerUnits.length + level.enemyUnits.length + (level.allyUnits?.length ?? 0);
       const state = initLevel(level.id);
@@ -80,8 +83,9 @@ describe('Level data', () => {
       expect(state.units).toHaveLength(expectedCount);
       expect(state.objectiveType).toBe(level.objectiveType);
 
-      const expectedReinforcementCount = level.reinforcements ? 1 : 0;
-      expect(state.reinforcementWaves).toHaveLength(expectedReinforcementCount);
+      const baseWaves = level.reinforcements ? 1 : 0;
+      const extraWaves = extraWaveCounts[level.id] ?? 0;
+      expect(state.reinforcementWaves).toHaveLength(baseWaves + extraWaves);
     }
   });
 

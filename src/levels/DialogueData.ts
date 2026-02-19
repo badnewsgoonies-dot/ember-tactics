@@ -1,3 +1,14 @@
+import { LEVEL_6_DIALOGUE } from './level6-data';
+import { LEVEL_7_DIALOGUE } from './level7-data';
+import { LEVEL_8_DIALOGUE } from './level8-data';
+import { LEVEL_9_DIALOGUE } from './level9-data';
+import { LEVEL_10_DIALOGUE } from './level10-data';
+import { LEVEL_11_DIALOGUE } from './level11-data';
+import { LEVEL_12_DIALOGUE } from './level12-data';
+import { LEVEL_13_DIALOGUE } from './level13-data';
+import { LEVEL_14_DIALOGUE } from './level14-data';
+import { LEVEL_15_DIALOGUE } from './level15-data';
+
 export interface DialogueLine {
   speaker: string;
   portrait: string;
@@ -270,7 +281,17 @@ const LEVEL_DIALOGUE: Record<number, LevelDialogue> = {
         text: 'Return home. Ember Tactics is victorious.'
       }
     ]
-  }
+  },
+  6: LEVEL_6_DIALOGUE as LevelDialogue,
+  7: LEVEL_7_DIALOGUE as LevelDialogue,
+  8: LEVEL_8_DIALOGUE as LevelDialogue,
+  9: LEVEL_9_DIALOGUE as LevelDialogue,
+  10: LEVEL_10_DIALOGUE as LevelDialogue,
+  11: LEVEL_11_DIALOGUE as LevelDialogue,
+  12: LEVEL_12_DIALOGUE as LevelDialogue,
+  13: LEVEL_13_DIALOGUE as LevelDialogue,
+  14: LEVEL_14_DIALOGUE as LevelDialogue,
+  15: LEVEL_15_DIALOGUE as LevelDialogue
 };
 
 export function getLevelDialogue(levelId: number): LevelDialogue {

@@ -3,6 +3,10 @@ import { LEVELS, type LevelDef, type LevelUnitDef } from './LevelDefs';
 import type { ReinforcementWave } from './ReinforcementSystem';
 import { createAllyUnit, createBossUnit, createEnemyUnit, createPlayerUnit } from '../units/UnitFactory';
 import type { Team, UnitData } from '../units/Unit';
+import { LEVEL_8_EXTRA_WAVES } from './level8-data';
+import { LEVEL_10_EXTRA_WAVES } from './level10-data';
+import { LEVEL_13_EXTRA_WAVES } from './level13-data';
+import { LEVEL_15_EXTRA_WAVES } from './level15-data';
 
 export interface LevelState {
   levelId: number;
@@ -58,6 +62,28 @@ export function initLevel(levelId: number): LevelState {
         }
       ]
     : [];
+
+  // Add extra reinforcement waves for levels with multiple waves
+  if (def.id === 8) {
+    for (const wave of LEVEL_8_EXTRA_WAVES) {
+      reinforcementWaves.push({ turn: wave.turn, units: wave.units, spawned: false });
+    }
+  }
+  if (def.id === 10) {
+    for (const wave of LEVEL_10_EXTRA_WAVES) {
+      reinforcementWaves.push({ turn: wave.turn, units: wave.units, spawned: false });
+    }
+  }
+  if (def.id === 13) {
+    for (const wave of LEVEL_13_EXTRA_WAVES) {
+      reinforcementWaves.push({ turn: wave.turn, units: wave.units, spawned: false });
+    }
+  }
+  if (def.id === 15) {
+    for (const wave of LEVEL_15_EXTRA_WAVES) {
+      reinforcementWaves.push({ turn: wave.turn, units: wave.units, spawned: false });
+    }
+  }
 
   return {
     levelId: def.id,
