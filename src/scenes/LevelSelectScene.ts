@@ -28,8 +28,31 @@ export class LevelSelectScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    const startY = 150;
-    const gapY = 88;
+    const startY = 140;
+    const gapY = 52;
+
+    const container = this.add.container(0, 0);
+    const totalHeight = startY + LEVELS.length * gapY + 60;
+    const maxScroll = Math.max(0, totalHeight - GAME_HEIGHT);
+    let scrollY = 0;
+
+    this.input.on('wheel', (_p: unknown, _gx: number, _gy: number, _gz: number, _gw: number, dy: number) => {
+      scrollY = Phaser.Math.Clamp(scrollY + (dy > 0 ? 40 : -40), 0, maxScroll);
+      container.y = -scrollY;
+    });
+
+    // Touch drag scroll
+    let dragStartY = 0;
+    let dragScrollY = 0;
+    this.input.on('pointerdown', (p: Phaser.Input.Pointer) => { dragStartY = p.y; dragScrollY = scrollY; });
+    this.input.on('pointermove', (p: Phaser.Input.Pointer) => {
+      if (!p.isDown) return;
+      const delta = dragStartY - p.y;
+      if (Math.abs(delta) > 10) {
+        scrollY = Phaser.Math.Clamp(dragScrollY + delta, 0, maxScroll);
+        container.y = -scrollY;
+      }
+    });
 
     LEVELS.forEach((level, idx) => {
       const levelProgress = progress.find((entry) => entry.levelId === level.id);
@@ -39,7 +62,7 @@ export class LevelSelectScene extends Phaser.Scene {
 
       const y = startY + idx * gapY;
       const width = 760;
-      const height = 68;
+      const height = 44;
       const fill = unlocked ? 0x24315f : 0x333341;
       const border = unlocked ? 0x5e78c9 : 0x555566;
       const textColor = unlocked ? '#ffffff' : '#9fa3b4';
@@ -48,32 +71,36 @@ export class LevelSelectScene extends Phaser.Scene {
         .rectangle(GAME_WIDTH / 2, y, width, height, fill, 0.95)
         .setStrokeStyle(2, border)
         .setOrigin(0.5);
+      container.add(card);
 
-      this.add
+      const label = this.add
         .text(GAME_WIDTH / 2 - 350, y, `Lv ${level.id}  ${level.name}`, {
           fontFamily: 'Verdana, sans-serif',
-          fontSize: '24px',
+          fontSize: '18px',
           color: textColor,
           fontStyle: 'bold'
         })
         .setOrigin(0, 0.5);
+      container.add(label);
 
-      this.add
-        .text(GAME_WIDTH / 2 + 150, y, starText, {
+      const starLabel = this.add
+        .text(GAME_WIDTH / 2 + 200, y, starText, {
           fontFamily: 'Trebuchet MS, sans-serif',
-          fontSize: '26px',
+          fontSize: '20px',
           color: unlocked ? '#f4c95d' : '#737387'
         })
         .setOrigin(0, 0.5);
+      container.add(starLabel);
 
       if (!unlocked) {
-        this.add
-          .text(GAME_WIDTH / 2 + 305, y, '🔒', {
+        const lock = this.add
+          .text(GAME_WIDTH / 2 + 330, y, '🔒', {
             fontFamily: 'Verdana, sans-serif',
-            fontSize: '30px',
+            fontSize: '22px',
             color: '#8f8f9f'
           })
           .setOrigin(0.5);
+        container.add(lock);
         return;
       }
 

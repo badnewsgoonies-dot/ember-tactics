@@ -11,7 +11,7 @@ export interface LevelProgress {
 export function createInitialProgression(): LevelProgress[] {
   return LEVELS.map((level) => ({
     levelId: level.id,
-    unlocked: level.id === 1,
+    unlocked: true,
     completed: false,
     stars: 0,
     bestTurns: 999
