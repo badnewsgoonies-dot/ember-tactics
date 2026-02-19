@@ -1,0 +1,21 @@
+{
+  "commands": [
+    "pnpm build",
+    "pnpm test",
+    "grep -q 'class BattleScene' src/scenes/BattleScene.ts",
+    "grep -q 'class GridManager' src/grid/GridManager.ts",
+    "grep -qE 'Knight|Archer|Mage|Healer|Cavalier|Thief' src/units/UnitClasses.ts",
+    "grep -q 'calcDamage' src/combat/DamageCalculation.ts",
+    "grep -q 'class AIController' src/ai/AIController.ts",
+    "grep -qE 'assessThreat|scoreThreat' src/ai/ThreatAssessment.ts",
+    "grep -qE 'class TurnManager|TurnManager' src/turn/TurnManager.ts",
+    "grep -q 'class CombatPreview' src/combat/CombatPreview.ts",
+    "grep -qE 'TerrainEffect|terrainEffects|TERRAIN' src/grid/TerrainEffects.ts",
+    "grep -qE 'generateTexture|createTexture|generateAll' src/utils/TextureGenerator.ts",
+    "grep -qE 'class DialogueBox|DialogueBox' src/ui/DialogueBox.ts",
+    "grep -qE 'class ObjectiveSystem|checkObjective' src/levels/ObjectiveSystem.ts",
+    "grep -qE 'class ReinforcementSystem|spawnReinforcements' src/levels/ReinforcementSystem.ts",
+    "grep -qE 'Fireball|RainOfArrows|MassHeal|Charge|Taunt|Steal' src/combat/AbilityDefs.ts",
+    "ls src/__tests__/combat.test.ts src/__tests__/ai.test.ts src/__tests__/pathfinding.test.ts src/__tests__/terrain.test.ts src/__tests__/movement.test.ts src/__tests__/abilities.test.ts src/__tests__/experience.test.ts src/__tests__/status.test.ts src/__tests__/objectives.test.ts src/__tests__/turn.test.ts src/__tests__/save.test.ts src/__tests__/levels.test.ts >/dev/null 2>&1"
+  ]
+}
